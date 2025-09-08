@@ -1,16 +1,24 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Posts" %>
 
-<h1>Posts</h1>
+<% if notice %>
+  <div class="mb-4 p-4 bg-green-100 text-green-800 rounded-md shadow">
+    <%= notice %>
+  </div>
+<% end %>
 
-<div id="posts">
+<h1 class="text-4xl font-bold text-gray-800 mb-6">Posts</h1>
+
+<div id="posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
+    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow">
+      <h2 class="text-xl font-semibold mb-2">Title: <%= post.title %></h2>
+      <p class="text-gray-700 mb-4">Content: <%= post.content %></p>
+      <%= link_to "Show this post", post, class: "inline-block text-blue-600 hover:underline font-medium" %>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New post", new_post_path %>
+<div class="mt-8 flex flex-wrap gap-4">
+  <%= link_to "Comments", comments_path, class: "bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700" %>
+  <%= link_to "New post", new_post_path, class: "bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700" %>
+</div>
